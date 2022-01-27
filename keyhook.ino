@@ -1,3 +1,5 @@
+#include "LowPower.h"
+
 /*
  * A key holder that shouts at you if you forget to place your keys on it when you get home.
  *
@@ -65,6 +67,10 @@ void setup()
     pinMode(LED_DOOR, OUTPUT);
     pinMode(LED_KEYS, OUTPUT);
     pinMode(LED_PRIMED, OUTPUT);
+
+    // Wake up when door opens or keys leave
+    attachInterrupt(digitalPinToInterrupt(PIN_DOOR), wakeUp, CHANGE);
+    attachInterrupt(digitalPinToInterrupt(PIN_KEYS), wakeUp, CHANGE);
 }
 
 void loop()
@@ -177,4 +183,22 @@ void loop()
         digitalWrite(LED_KEYS, LOW);
         digitalWrite(LED_PRIMED, LOW);
     }
+
+    // We can sleep if the alarm's off and keys are present (not counting down to prime)
+    // Or the alarm is primed (door opening will wake and immediately transition to ALARM_TRIGGERED)
+    if ((alarm_state == ALARM_OFF && keys_state == KEYS_PRESENT) || alarm_state == ALARM_PRIMED)
+    {
+        Serial.print("Going to sleep at ");
+        Serial.println(current_ms);
+
+        // Give the serial logs a chance to send before actual power down
+        delay(250);
+        LowPower.powerDown(SLEEP_FOREVER, ADC_OFF, BOD_OFF);
+    }
+}
+
+void wakeUp()
+{
+    Serial.print("Waking up at ");
+    Serial.println(current_ms);
 }
