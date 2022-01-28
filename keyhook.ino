@@ -169,12 +169,15 @@ void loop()
 
         case ALARM_PRIMED:
             digitalWrite(LED_PRIMED, HIGH);
+            break;
 
         case ALARM_TRIGGERED:
             digitalWrite(LED_PRIMED, (current_ms / 250) % 2 ? HIGH : LOW);
+            break;
 
         case ALARM_SOUNDING:
             digitalWrite(LED_PRIMED, (current_ms / 100) % 2 ? HIGH : LOW);
+            break;
         }
     }
     else
