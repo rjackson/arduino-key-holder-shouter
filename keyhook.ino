@@ -189,7 +189,7 @@ void loop()
 
     // We can sleep if the alarm's off and keys are present (not counting down to prime)
     // Or the alarm is primed (door opening will wake and immediately transition to ALARM_TRIGGERED)
-    if ((alarm_state == ALARM_OFF && keys_state == KEYS_PRESENT) || alarm_state == ALARM_PRIMED)
+    if ((alarm_state == ALARM_OFF && keys_state == KEYS_PRESENT) || (alarm_state == ALARM_PRIMED && door_state == DOOR_CLOSED))
     {
         Serial.print("Going to sleep at ");
         Serial.println(current_ms);
