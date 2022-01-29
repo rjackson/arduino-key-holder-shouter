@@ -30,7 +30,7 @@ const unsigned long ALARM_GRACE_TIMEOUT_DEV = 10ul * 1000ul;
 
 // In case of false activations, switch the alarm off after this long.
 const unsigned long ALARM_SOUNDING_TIMEOUT = 2ul * 60ul * 1000ul;
-const unsigned long ALARM_SOUNDING_TIMEOUT_DEV = 60ul * 1000ul;
+const unsigned long ALARM_SOUNDING_TIMEOUT_DEV = 30ul * 1000ul;
 
 const bool DOOR_OPEN = true;
 const bool DOOR_CLOSED = false;
