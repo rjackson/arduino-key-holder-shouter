@@ -493,4 +493,6 @@ void stopMelody()
 {
     noTone(BUZZER);
     buzzerActive = false;
+    currentNote = 0;
+    nextNoteAt = 0;
 }
