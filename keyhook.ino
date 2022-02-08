@@ -308,6 +308,9 @@ int noteDuration;
 
 void setup()
 {
+    CLKPR = 0x80; // (1000 0000) enable change in clock frequency
+    CLKPR = 0x01; // (0000 0001) use clock division factor 2 to reduce the frequency from 16 MHz to 8 MHz
+
     Serial.begin(9600);
 
     pinMode(PIN_DOOR, INPUT_PULLUP);
